@@ -5,16 +5,16 @@ import java.util.Set;
 /**
  * @author Gorobets Dmitriy
  *         <p/>
- *         At this Class in method "calculate" I put 3 arguments
- *         There is checked an operator and according to the operator chooses,
- *         which way to use for a calculation in the constructor
+ *         At this Class in method "isPhrase" I put 2 arguments
+ *         There is I check whether a word -"word" belongs to the text or nor
+ *
+ * @argum  "String word"- it's a word which we want to find in citations of text
  *         <p/>
- *         First argument is "firstArg"-it have to be a double type
- *         <p/>
- *         Second argument is "operator"-it have to be an operator
- *         <p/>
- *         Third argument is "secondArg"-it have to be a double type
- */
+ *         "Set<String> citations"-it's a set of citations which we found at the text at "CitationFinder" class
+ *
+ * @return "true" if There was found a word which equal to the "word" variable in the citations!
+ *          "false" if "word" wasn't found.
+*/
 /*
 2. Есть текст (отрывок из Гарри Поттера):
 
@@ -31,44 +31,48 @@ jumping to her feet and pointing at number four. “Dumbledore — you can’t. 
 
 public class Searcher {
 
-//    public static int countCitation(String s) {
-//        int quoteNumber = 0;
-//
-//        String quote = "\"";
-//        String[] arrStr = s.split("");
-//        for (String str : arrStr) {
-//            if (str.equals(quote)) {
-//                quoteNumber++;
-//            }
-//        }
-//        return quoteNumber;
-//    }
 
     public static boolean isPhrase(String word, Set<String> citations) {
-        boolean result= false;
 
-       for (String citat:citations){
-//           if(citat.substring(0,citat.length())==true)
-       }
+        boolean result = false;
+        int citatNum=0;
+        for (String citation : citations) {
+            String[] strArr = citation.split(" ");
 
-//        int countOfCitation;
-//        for (countOfCitation = 1; countOfCitation <=countCitation(s)/2 ; countOfCitation++) {
-//            s = s.substring(s.indexOf('"')+1, s.indexOf('"', s.indexOf('"') + 2));
-//            System.out.println(s);
-//            String[] parts = s.split(" ");
-//            System.out.println(Arrays.toString(parts));
-//            for (int i = 0; i < parts.length; i++) {
-//                if (parts[i].equals(word)) {
-//                    result = true;
-//        }
-//
-//
-////                System.out.print(" " + parts[i]);
+//           int occure =  citation.indexOf(word);
+//            if(occure!= -1){
+//                result = true;
+//                System.out.println("Я нашел слово " + word + ", которое ты искал в цитатах заданного текста!");
 //            }
-//        }
-//
+//            System.out.println(result);
+
+
+            for (int wordsNum = 0; wordsNum < strArr.length; wordsNum++) {
+
+
+
+                if (strArr[wordsNum].equals(word)) {
+
+                    result = true;
+                    citatNum++;
+                }
+
+            }
+
+
+//            System.out.println(Arrays.toString(strArr));
+
+        }
+
+        if(result==true){
+            System.out.println("Я нашел слово " + word + ", которое ты искал в цитатах заданного текста!");
+            System.out.println("Слово "+word+" входит в состав "+citatNum+" цицат.");
+        }
+//        System.out.println(result);
         return result;
     }
 
 
 }
+
+

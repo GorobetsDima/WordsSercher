@@ -5,48 +5,60 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 /**
- * Created by Вика on 27.10.2015.
+ * @param "text" - it's a text where we want to find citations
+ * @author Gorobets Dmitriy
+ *         <p/>
+ *         At this Class in the method "parseCitationFromText" I put 1 argument "String text"
+ *         There is I check whether a "text" contains the citation which
+ * @return "Set<String>" if There was found the citations which equal to the "word" variable in the citations!
+ * "false" if "word" wasn't found.
  */
 public class CitationFinder {
 
-    private Pattern patternSitation;
-
-    private Matcher matcherSitation;
-
-
-    private static final String SITATION_PATTERN = "(“([^\" “ ”]+?)”)";
-
-    public CitationFinder() {
-        patternSitation = Pattern.compile(SITATION_PATTERN);
-    }
+    private static final String CITATION_PATTERN = "(“([^\\\"\\“\\”]+?)”)";
 
 
     /**
      * Validate text with regular expression
      *
      * @param text string content for validation
-     * @return String
+     * @return Set<String>
      */
-    public Set<String> parseSitationFromText(String text) {
-
+    public Set<String> parseCitationFromText(String text) {
 
         Set<String> result = new HashSet<String>();
+        Matcher matcher = createMatcher(text);
 
+        while (matcher.find()) {
 
-        matcherSitation = patternSitation.matcher(text);
+            String citation = matcher.group(1); // citation
 
-        while (matcherSitation.find()) {
+            citation = citation.replaceAll("“", "");
+            citation = citation.replaceAll("”", "");
+            citation = citation.replaceAll(",", "");
+            citation = citation.replaceAll("\\.", "");
+            citation = citation.replaceAll("\\?", "");
+            citation = citation.replaceAll("\\!", "");
+            result.add(citation);
 
-
-            String sitation = matcherSitation.group(1); // citation
-            sitation = sitation.replaceAll("“", "");
-            sitation = sitation.replaceAll("”", "");
-            result.add(sitation);
-
+        }
+        if (result.size() == 0) {
+            System.out.println("Цитаты соответствующие регулярному выражению \"СITATION_PATTERN\" не были найдены");
         }
         return result;
 
 
+    }
+
+    public Matcher createMatcher(String text) {
+        Matcher matcherCitation;
+
+        Pattern patternCitation = Pattern.compile(CITATION_PATTERN);
+
+        matcherCitation = patternCitation.matcher(text);
+
+        return matcherCitation;
     }
 }
