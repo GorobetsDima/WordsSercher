@@ -5,13 +5,13 @@ package GorobetsDmitriy;
  */
 public class Main {
     public static void main(String[] args) {
-        String s = "“You don’t mean — you can’t mean the people who live here?” cried Professor McGonagall," +
-                "jumping to her feet and pointing at number four. “Dumbledore — you can’t. I’ve been watching them all day." +
+        String text = "“You don’t mean — you can’t mean the people who live here?” cried Professor McGonagall," +
+                "jumping to her feet and \"hfkshgzsfjA can’t ISJFKASJGLKSJDFLKG\"pointing at number four. “Dumbledore — you can’t. I’ve been watching them all day." +
                 " You couldn’t find two people who are less like us. And they’ve got this son —" +
                 " I saw him kicking his mother all the way up the street, screaming for sweets. Harry Potter come and live here!”";
         String word = "can’t";
-        CitationFinder find = new CitationFinder();
-        System.out.println(Searcher.isPhrase(word, find.parseCitationFromText(s)));
+        Occurrence find = new Occurrence();
+        System.out.println(find.isPhrase(text,word));
 
     }
 }

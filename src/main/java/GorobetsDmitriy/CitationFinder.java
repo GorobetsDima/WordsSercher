@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 public class CitationFinder {
     public static final Logger CIT_FIND_LOGG = Logger.getLogger(CitationFinder.class);
 
-    private static final String CITATION_PATTERN = "(“([^\\\"\\“\\”]+?)”)";
+    private static final String CITATION_PATTERN = "(“([^\\\"\\“\\”]+?)”|\"([^\\\"\\“\\”]+?)\")";
 
 
     /**
@@ -29,7 +29,7 @@ public class CitationFinder {
      * @param text string content for validation
      * @return Set<String>
      */
-    public Set<String> parseCitationFromText(String text) {
+    public static Set<String> parseCitationFromText(String text) {
 
         Set<String> citations = new HashSet<String>();
         Matcher matcher = createMatcher(text);
@@ -37,10 +37,9 @@ public class CitationFinder {
         while (matcher.find()) {
 
             String citation = matcher.group(1); // citation
-
-            validateCitations(citation);
-
-            citations.add(citation);
+            String citat = validateCitations(citation);
+//            System.out.println(citat);
+            citations.add(citat);
 
         }
         if (citations.size() == 0) {
@@ -51,7 +50,7 @@ public class CitationFinder {
 
     }
 
-    public Matcher createMatcher(String text) {
+    public static Matcher createMatcher(String text) {
         Matcher matcherCitation;
 
         Pattern patternCitation = Pattern.compile(CITATION_PATTERN);
@@ -61,14 +60,17 @@ public class CitationFinder {
         return matcherCitation;
     }
 
-    public String validateCitations(String citation) {
+    public static String validateCitations(String citation) {
 
         citation = citation.replaceAll("“", "");
-        citation = citation.replaceAll("”", "");
+        citation = citation.replaceAll("“", "");
+        citation = citation.replaceAll("\"", "");
         citation = citation.replaceAll(",", "");
         citation = citation.replaceAll("\\.", "");
         citation = citation.replaceAll("\\?", "");
         citation = citation.replaceAll("\\!", "");
+        citation = citation.replaceAll("—", "");
+        citation = citation.replaceAll("-", "");
 
         return citation;
     }
