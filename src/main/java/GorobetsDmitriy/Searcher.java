@@ -1,5 +1,7 @@
 package GorobetsDmitriy;
 
+import org.apache.log4j.Logger;
+
 import java.util.Set;
 
 /**
@@ -31,6 +33,8 @@ jumping to her feet and pointing at number four. “Dumbledore — you can’t. 
 
 public class Searcher {
 
+    public static final Logger SEARCH_LOGG = Logger.getLogger(Searcher.class);
+
 
     public static boolean isPhrase(String word, Set<String> citations) {
 
@@ -42,7 +46,7 @@ public class Searcher {
 //           int occure =  citation.indexOf(word);
 //            if(occure!= -1){
 //                result = true;
-//                System.out.println("Я нашел слово " + word + ", которое ты искал в цитатах заданного текста!");
+//                 SEARCH_LOGG.info("Я нашел слово " + word + ", которое ты искал в цитатах заданного текста!");
 //            }
 //            System.out.println(result);
 
@@ -65,8 +69,8 @@ public class Searcher {
         }
 
         if(result==true){
-            System.out.println("Я нашел слово " + word + ", которое ты искал в цитатах заданного текста!");
-            System.out.println("Слово "+word+" входит в состав "+citatNum+" цицат.");
+           SEARCH_LOGG.info("Я нашел слово " + word + ", которое ты искал в цитатах заданного текста!");
+            SEARCH_LOGG.info("Слово " + word + " содержат " + citatNum + " цицаты.");
         }
 //        System.out.println(result);
         return result;

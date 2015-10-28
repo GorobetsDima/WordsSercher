@@ -1,5 +1,7 @@
 package GorobetsDmitriy;
 
+import org.apache.log4j.Logger;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -16,6 +18,7 @@ import java.util.regex.Pattern;
  * "false" if "word" wasn't found.
  */
 public class CitationFinder {
+    public static final Logger CIT_FIND_LOGG = Logger.getLogger(CitationFinder.class);
 
     private static final String CITATION_PATTERN = "(“([^\\\"\\“\\”]+?)”)";
 
@@ -28,26 +31,22 @@ public class CitationFinder {
      */
     public Set<String> parseCitationFromText(String text) {
 
-        Set<String> result = new HashSet<String>();
+        Set<String> citations = new HashSet<String>();
         Matcher matcher = createMatcher(text);
 
         while (matcher.find()) {
 
             String citation = matcher.group(1); // citation
 
-            citation = citation.replaceAll("“", "");
-            citation = citation.replaceAll("”", "");
-            citation = citation.replaceAll(",", "");
-            citation = citation.replaceAll("\\.", "");
-            citation = citation.replaceAll("\\?", "");
-            citation = citation.replaceAll("\\!", "");
-            result.add(citation);
+            validateCitations(citation);
+
+            citations.add(citation);
 
         }
-        if (result.size() == 0) {
-            System.out.println("Цитаты соответствующие регулярному выражению \"СITATION_PATTERN\" не были найдены");
+        if (citations.size() == 0) {
+            CIT_FIND_LOGG.info("Цитаты соответствующие регулярному выражению \"СITATION_PATTERN\" не были найдены");
         }
-        return result;
+        return citations;
 
 
     }
@@ -60,5 +59,17 @@ public class CitationFinder {
         matcherCitation = patternCitation.matcher(text);
 
         return matcherCitation;
+    }
+
+    public String validateCitations(String citation) {
+
+        citation = citation.replaceAll("“", "");
+        citation = citation.replaceAll("”", "");
+        citation = citation.replaceAll(",", "");
+        citation = citation.replaceAll("\\.", "");
+        citation = citation.replaceAll("\\?", "");
+        citation = citation.replaceAll("\\!", "");
+
+        return citation;
     }
 }
