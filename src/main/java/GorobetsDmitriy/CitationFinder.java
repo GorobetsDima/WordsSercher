@@ -38,7 +38,7 @@ public class CitationFinder {
 
             String citation = matcher.group(1); // citation
             String citat = validateCitations(citation);
-//            System.out.println(citat);
+
             citations.add(citat);
 
         }
@@ -63,7 +63,7 @@ public class CitationFinder {
     public static String validateCitations(String citation) {
 
         citation = citation.replaceAll("“", "");
-        citation = citation.replaceAll("“", "");
+        citation = citation.replaceAll("”", "");
         citation = citation.replaceAll("\"", "");
         citation = citation.replaceAll(",", "");
         citation = citation.replaceAll("\\.", "");

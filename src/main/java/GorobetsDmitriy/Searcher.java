@@ -6,11 +6,11 @@ import java.util.Set;
 
 /**
  * @author Gorobets Dmitriy
- *         <p/>
+ *         <p>
  *         At this Class in method "isContain" I put 2 arguments
  *         There is I check whether a word -"word" belongs to the text or nor
  * @argum "String word"- it's a word which we want to find in citations of text
- * <p/>
+ * <p>
  * "Set<String> citations"-it's a set of citations which we found at the text at "CitationFinder" class
  * @return "true" if There was found a word which equal to the "word" variable in the citations!
  * "false" if "word" wasn't found.
@@ -39,24 +39,27 @@ public class Searcher {
         boolean result = false;
         int citatNum = 0;
         SEARCH_LOGG.info("Цитаты, в которых было найдено слово " + word + ":");
+
+
         for (String citation : citations) {
+            if (citation.contains(word)) {
+                SEARCH_LOGG.info(citation);
+                result = true;
+                citatNum++;
 
-            String[] strArr = citation.split(" ");
-
-            for (int wordsNum = 0; wordsNum < strArr.length; wordsNum++) {
-
-                if (strArr[wordsNum].equals(word)) {
-                    SEARCH_LOGG.info(citation);
-                    result = true;
-                    citatNum++;
-                }
             }
         }
-        if (result == true) {
+
+        if (result)
+
+        {
             SEARCH_LOGG.info("Слово " + word + " содержат " + citatNum + " цицаты.");
-        } else {
+        } else
+
+        {
             SEARCH_LOGG.info("В данном тексте нет таких цитат!");
         }
+
         return result;
     }
 }
