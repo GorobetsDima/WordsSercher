@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  *         <p/>
  *         At this Class in the method "parseCitationFromText" I put 1 argument "String text"
  *         There is I check whether a "text" contains the citation which
- * @return "Set<String>" if There was found the citations which equal to the "word" variable in the citations!
+ * @return "Set<String>" if there was found the citations which contains to the "word" variable in the citations!
  * "false" if "word" wasn't found.
  */
 public class CitationFinder {
@@ -27,7 +27,9 @@ public class CitationFinder {
      * Validate text with regular expression
      *
      * @param text string content for validation
-     * @return Set<String>
+     * @return Set<String> if there was found the citations which contain the "word" variable in the citations!
+     *
+     *         if citations wasn't found,then returnes -"Цитаты соответствующие регулярному выражению "СITATION_PATTERN" не были найдены"
      */
     public static Set<String> parseCitationFromText(String text) {
 
@@ -38,7 +40,6 @@ public class CitationFinder {
 
             String citation = matcher.group(1); // citation
             String citat = validateCitations(citation);
-
             citations.add(citat);
 
         }
@@ -65,12 +66,7 @@ public class CitationFinder {
         citation = citation.replaceAll("“", "");
         citation = citation.replaceAll("”", "");
         citation = citation.replaceAll("\"", "");
-        citation = citation.replaceAll(",", "");
-        citation = citation.replaceAll("\\.", "");
-        citation = citation.replaceAll("\\?", "");
-        citation = citation.replaceAll("\\!", "");
-        citation = citation.replaceAll("—", "");
-        citation = citation.replaceAll("-", "");
+
 
         return citation;
     }
