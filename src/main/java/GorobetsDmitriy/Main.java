@@ -1,8 +1,11 @@
 package GorobetsDmitriy;
 
 /**
- * Created by Вика on 26.10.2015.
+ *
+ * @author Gorobets Dmitriy
+ *
  */
+
 public class Main {
     public static void main(String[] args) {
         String text = "“You don’t mean — you can’t mean the people who live here?” cried Professor McGonagall," +

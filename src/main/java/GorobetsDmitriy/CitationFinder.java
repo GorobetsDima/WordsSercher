@@ -9,13 +9,12 @@ import java.util.regex.Pattern;
 
 
 /**
- * @param "text" - it's a text where we want to find citations
+ *
  * @author Gorobets Dmitriy
  *         <p/>
- *         At this Class in the method "parseCitationFromText" I put 1 argument "String text"
- *         There is I check whether a "text" contains the citation which
- * @return "Set<String>" if there was found the citations which contains to the "word" variable in the citations!
- * "false" if "word" wasn't found.
+ *         At this Class in the method "parseCitationFromText"
+ *         There is I check whether a "text" contains the citation
+ *
  */
 public class CitationFinder {
     public static final Logger CIT_FIND_LOGG = Logger.getLogger(CitationFinder.class);
